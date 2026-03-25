@@ -4,16 +4,28 @@ A lightweight command-line markdown viewer with live reload. Run it from any dir
 
 ## Install
 
-```
-go install github.com/pablolopezsantori/mdview@latest
-```
-
-Or build from source:
+From this repo:
 
 ```
-git clone https://github.com/pablolopezsantori/mdview.git
-cd mdview
-go build -ldflags="-s -w" -o mdview .
+cd ~/pablo/mdviewer
+go install .
+```
+
+This puts the `mdview` binary in your Go bin directory (`~/go/bin/`). As long as your shell config has that on your PATH, you can run `mdview` from anywhere:
+
+```sh
+# This line should be in your ~/.zshrc
+export PATH="$PATH:$(go env GOPATH)/bin"
+```
+
+### Updating
+
+After pulling changes or editing the code, just run `go install .` again from this directory. It overwrites the old binary.
+
+### Verifying
+
+```
+which mdview    # should print ~/go/bin/mdview
 ```
 
 ## Usage
@@ -26,7 +38,7 @@ mdview --port 8080 .       # custom port
 mdview --no-open .         # don't auto-open browser
 ```
 
-The browser opens automatically. Edit any markdown file and the page reloads instantly.
+The browser opens automatically. Edit any markdown file and the page reloads instantly. Press `Ctrl+C` to stop.
 
 ### Flags
 
