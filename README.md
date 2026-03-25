@@ -2,6 +2,8 @@
 
 A lightweight command-line markdown viewer with live reload. Run it from any directory to preview markdown files in your browser.
 
+![mdview screenshot](assets/screenshot.png)
+
 ## Install
 
 From this repo:
