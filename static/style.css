@@ -1,0 +1,292 @@
+/* mdview — GitHub-style markdown theme */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: #24292f;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- Top bar --- */
+
+#topbar {
+    position: sticky;
+    top: 0;
+    background: #f6f8fa;
+    border-bottom: 1px solid #d0d7de;
+    padding: 8px 24px;
+    font-size: 13px;
+    color: #656d76;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#topbar .filename {
+    font-weight: 600;
+    color: #24292f;
+}
+
+#topbar .dirpath {
+    color: #656d76;
+}
+
+/* --- File navigation --- */
+
+#filenav {
+    display: flex;
+    gap: 0;
+    background: #f6f8fa;
+    border-bottom: 1px solid #d0d7de;
+    padding: 0 24px;
+    overflow-x: auto;
+}
+
+#filenav:empty {
+    display: none;
+}
+
+.filenav-item {
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #656d76;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+}
+
+.filenav-item:hover {
+    color: #24292f;
+}
+
+.filenav-item.active {
+    color: #24292f;
+    font-weight: 600;
+    border-bottom-color: #fd8c73;
+}
+
+/* --- Main content --- */
+
+#content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+    transition: opacity 0.1s;
+}
+
+/* --- Typography --- */
+
+#content h1, #content h2, #content h3,
+#content h4, #content h5, #content h6 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+#content h1 {
+    font-size: 2em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #d0d7de;
+}
+
+#content h2 {
+    font-size: 1.5em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #d0d7de;
+}
+
+#content h3 { font-size: 1.25em; }
+#content h4 { font-size: 1em; }
+#content h5 { font-size: 0.875em; }
+#content h6 { font-size: 0.85em; color: #656d76; }
+
+#content p {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+/* --- Links --- */
+
+#content a {
+    color: #0969da;
+    text-decoration: none;
+}
+
+#content a:hover {
+    text-decoration: underline;
+}
+
+/* --- Lists --- */
+
+#content ul, #content ol {
+    padding-left: 2em;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+#content li + li {
+    margin-top: 4px;
+}
+
+/* Task list checkboxes */
+#content ul.contains-task-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+#content .task-list-item {
+    position: relative;
+    padding-left: 24px;
+}
+
+#content .task-list-item input[type="checkbox"] {
+    position: absolute;
+    left: 0;
+    top: 4px;
+}
+
+/* --- Code --- */
+
+#content code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 85%;
+    background: #f6f8fa;
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
+}
+
+#content pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    background: #f6f8fa;
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto;
+    line-height: 1.45;
+}
+
+#content pre code {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: 85%;
+}
+
+/* --- Tables --- */
+
+.table-wrapper {
+    overflow-x: auto;
+    margin-bottom: 16px;
+}
+
+#content table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#content th, #content td {
+    border: 1px solid #d0d7de;
+    padding: 6px 13px;
+    text-align: left;
+}
+
+#content th {
+    font-weight: 600;
+    background: #f6f8fa;
+}
+
+#content tr:nth-child(even) {
+    background: #f6f8fa;
+}
+
+/* --- Blockquotes --- */
+
+#content blockquote {
+    margin: 0 0 16px 0;
+    padding: 0 1em;
+    color: #656d76;
+    border-left: 4px solid #d0d7de;
+}
+
+/* --- Images --- */
+
+#content img {
+    max-width: 100%;
+    display: block;
+    margin: 16px 0;
+}
+
+/* --- Horizontal rule --- */
+
+#content hr {
+    border: none;
+    border-top: 1px solid #d0d7de;
+    margin: 24px 0;
+}
+
+/* --- Connection banners --- */
+
+.connection-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 16px;
+    font-size: 14px;
+    text-align: center;
+    z-index: 100;
+    animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+.connection-banner-warn {
+    background: #fff8c5;
+    color: #6a5b00;
+    border-bottom: 1px solid #d4a72c;
+}
+
+.connection-banner-ok {
+    background: #dafbe1;
+    color: #116329;
+    border-bottom: 1px solid #4ac26b;
+}
+
+/* --- Not-found overlay --- */
+
+#not-found-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+}
+
+.not-found-box {
+    text-align: center;
+    color: #656d76;
+}
+
+.not-found-box h2 {
+    margin: 0 0 8px;
+    color: #24292f;
+}
