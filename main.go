@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"net"
 	"net/http"
 	"os"
 	"os/exec"
@@ -16,7 +17,7 @@ import (
 )
 
 func main() {
-	port := flag.Int("port", 0, "port to serve on (0 = auto-pick)")
+	port := flag.Int("port", 1414, "port to serve on")
 	host := flag.String("host", "127.0.0.1", "host to bind to")
 	noOpen := flag.Bool("no-open", false, "do not open browser automatically")
 
@@ -79,11 +80,19 @@ func main() {
 	}
 	defer watcher.Close()
 
-	addr := fmt.Sprintf("%s:%d", *host, *port)
-	server, listener, err := setupServer(addr, initialFile, rootDir, hub)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "mdview: %v\n", err)
-		os.Exit(1)
+	// Try the requested port. If taken, increment until one works.
+	var server *http.Server
+	var listener net.Listener
+	for attempt := 0; attempt < 10; attempt++ {
+		addr := fmt.Sprintf("%s:%d", *host, *port+attempt)
+		server, listener, err = setupServer(addr, initialFile, rootDir, hub)
+		if err == nil {
+			break
+		}
+		if attempt == 9 {
+			fmt.Fprintf(os.Stderr, "mdview: could not find an open port (%d–%d)\n", *port, *port+9)
+			os.Exit(1)
+		}
 	}
 
 	actualAddr := listener.Addr().String()

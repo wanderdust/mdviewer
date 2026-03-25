@@ -27,7 +27,7 @@ mdview --no-open .            # don't auto-open browser
 
 | Flag | Default | Description |
 |------|---------|-------------|
-| `--port` | `0` (auto) | Port to serve on. `0` picks a random available port. |
+| `--port` | `1414` | Port to serve on. If taken, increments until one is free. |
 | `--host` | `127.0.0.1` | Host to bind to |
 | `--no-open` | `false` | Don't open browser automatically |
 
